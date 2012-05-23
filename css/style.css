@@ -228,7 +228,7 @@ body {
   background-color: #DDD;
   background-image: url("../img/paper.png");
   background-repeat: repeat;
-  -webkit-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
+  -webkit-box-shadow: 0 0 0 0 transparent, inset 0 0 30px 0 rgba(0, 200, 0, 0.5);
   -moz-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
   box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5); }
 
@@ -236,9 +236,13 @@ body {
   position: relative;
   width: 550px;
   margin: 100px auto;
+  padding: 10px;
   background-color: #fff;
   text-align: center;
-  -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  font-family: 'Numans', sans-serif;
+  font-variant: small-caps;
+  font-size: 20px;
+  -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4), inset 0 0 50px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1); }
 
@@ -255,7 +259,7 @@ body {
   -ms-transform: rotate(-5deg) scale(1) skew(-5deg);
   -o-transform: rotate(-5deg) scale(1) skew(-5deg);
   transform: rotate(-5deg) scale(1) skew(-5deg);
-  -webkit-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
+  -webkit-box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 0 transparent;
   -moz-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   z-index: -1; }
@@ -269,56 +273,54 @@ body {
   -o-transform: rotate(5deg) scale(1) skew(5deg);
   transform: rotate(5deg) scale(1) skew(5deg); }
 
-h1 {
+div.stitch {
+  padding: 5px;
+  background-color: #008000;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -ms-border-radius: 3px 3px 3px 3px;
+  -o-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px 35px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.2); }
+
+div.stitch h1 {
+  border: 1px dashed #ddd;
+  -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7), inset 2px 1px 6px 4px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.7), inset 2px 1px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7), inset 2px 1px 6px rgba(0, 0, 0, 0.1);
   font-family: 'Monsieur La Doulaise', cursive;
   font-weight: 400;
-  font-size: 4em;
-  height: 160px;
-  line-height: 160px;
-  text-shadow: 0px 1px 2px #006000;
-  color: #005000;
-  padding: 20px 35px; }
+  font-size: 60px;
+  font-variant: normal;
+  text-shadow: -1px -1px #444444;
+  color: #ddd;
+  padding: 20px 35px;
+  margin: 0;
+  background-color: transparent;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -ms-border-radius: 3px 3px 3px 3px;
+  -o-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px; }
 
-.ribbon, .rectangle, .triangle-t, .triangle-b {
-  position: relative; }
+div.content {
+  padding: 20px 10px; }
 
-.ribbon {
-  left: 20px;
-  top: -10px;
-  height: 200px;
-  float: left; }
+div.content h1 {
+  font-weight: 400; }
 
-.rectangle {
-  background: none repeat scroll 0 0 #00aa00;
-  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
-  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
-  height: 208px;
-  border: 1px solid #006000;
-  width: 13px;
-  z-index: 100;
-  top: -5px;
-  white-space: nowrap; }
-  .rectangle img {
-    position: relative;
-    width: 135px;
-    left: -61px;
-    top: 20px; }
+div.content h2 {
+  font-weight: 400;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid #222; }
 
-.triangle-t, .triangle-b {
-  border-width: 5px;
-  border-style: solid;
-  height: 0;
-  width: 0;
-  left: 10px; }
-
-.triangle-t {
-  border-color: transparent transparent #006400 transparent;
-  top: 0; }
-
-.triangle-b {
-  border-color: #006400 transparent transparent transparent;
-  bottom: 10px; }
+div.content p {
+  font-weight: 400;
+  text-align: left;
+  padding-left: 20px; }
 
 /* =============================================================================
    Media Queries

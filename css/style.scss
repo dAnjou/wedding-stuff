@@ -74,8 +74,8 @@ td { vertical-align: top; }
    Author:
    ========================================================================== */
 
-@mixin box-shadow($x, $y, $blur, $color, $inset_x: 0, $inset_y: 0, $inset_blur: 0, $inset_color: transparent) {
-    -webkit-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
+@mixin box-shadow($x, $y, $blur, $spread, $color, $inset_x: 0, $inset_y: 0, $inset_blur: 0, $inset_spread: 0, $inset_color: transparent) {
+    -webkit-box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_spread $inset_color;
     -moz-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
     box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
 }
@@ -84,6 +84,14 @@ td { vertical-align: top; }
     -webkit-box-shadow: inset $x $y $blur $color;
     -moz-box-shadow: inset $x $y $blur $color;
     box-shadow: inset $x $y $blur $color;
+}
+
+@mixin border-radius($top, $right, $bottom, $left) {
+    -webkit-border-radius: $top $right $bottom $left;
+    -moz-border-radius: $top $right $bottom $left;
+    -ms-border-radius: $top $right $bottom $left;
+    -o-border-radius: $top $right $bottom $left;
+    border-radius: $top $right $bottom $left;
 }
 
 @mixin transform($rotate, $scale, $skew) {
@@ -104,16 +112,20 @@ body {
     background-color: #DDD;
     background-image: url("../img/paper.png");
     background-repeat: repeat;
-    @include box-shadow(0, 0, 0, transparent, 0, 0, 30px, rgba(0,200,0,0.5));
+    @include box-shadow(0, 0, 0, 0, transparent, 0, 0, 30px, 0, rgba(0,200,0,0.5));
 }
 
 .main {
     position: relative;
     width: 550px;
     margin: 100px auto;
+    padding: 10px;
     background-color: #fff;
     text-align: center;
-    @include box-shadow(0, 1px, 8px, rgba(0, 0, 0, 0.4), 0, 0, 50px, rgba(0, 0, 0, 0.1));
+    font-family: 'Numans', sans-serif;
+    font-variant: small-caps;
+    font-size: 20px;
+    @include box-shadow(0, 1px, 8px, 0, rgba(0, 0, 0, 0.4), 0, 0, 50px, 0, rgba(0, 0, 0, 0.1));
 }
 
 .main:before, .main:after {  
@@ -125,7 +137,7 @@ body {
     bottom: 12px;  
     background: transparent;
     @include transform(rotate(-5deg), scale(1), skew(-5deg));
-    @include box-shadow(0, 10px, 12px, rgba(0, 0, 0, 0.5));
+    @include box-shadow(0, 10px, 12px, 0, rgba(0, 0, 0, 0.5));
     z-index: -1;  
 }
 
@@ -135,65 +147,47 @@ body {
     @include transform(rotate(5deg), scale(1), skew(5deg));
 }
 
-$ribbon-width: 15px;
-$ribbon-distance: 5px;
-$ribbon-height: 200px;
+div.stitch {
+    padding: 5px;
+    background-color: #008000;
+    @include border-radius(3px, 3px, 3px, 3px);
+    @include box-shadow(0, 0, 0, 0, rgba(0, 0, 0, 0.4), 0, 0, 35px, 35px, rgba(0, 0, 0, 0.2));
+}
 
-h1 {
+div.stitch h1 {
+    border: 1px dashed #ddd;
+    @include box-shadow(0, 0, 3px, 0, rgba(0, 0, 0, 0.7), 2px, 1px, 6px, 4px, rgba(0, 0, 0, 0.1));
     font-family: 'Monsieur La Doulaise', cursive;
     font-weight: 400;
-    font-size: 4em;
-    height: $ribbon-height - 40px;
-    line-height: $ribbon-height - 40px;
-    text-shadow: 0px 1px 2px #006000;
-    color: #005000;
+    font-size: 60px;
+    font-variant: normal;
+    text-shadow: -1px -1px #444;
+    color: #ddd;
     padding: 20px 35px;
+    margin: 0;
+    background-color: transparent;
+    @include border-radius(3px, 3px, 3px, 3px);
 }
 
-.ribbon, .rectangle, .triangle-t, .triangle-b {
-    position: relative;
+div.content {
+    padding: 20px 10px;
 }
 
-.ribbon {
-    left: 20px;
-    top: -2 * $ribbon-distance;
-    height: $ribbon-height;
-    float: left;
+div.content h1 {
+    font-weight: 400;
 }
 
-.rectangle {
-    background: none repeat scroll 0 0 rgb(0,170,0);
-    @include box-shadow(0, 0, 4px, rgba(0, 0, 0, 0.5));
-    height: $ribbon-height + 2 * $ribbon-distance - 2px;
-    border: 1px solid #006000;
-    width: $ribbon-width - 2px;
-    z-index: 100;
-    top: -1 * $ribbon-distance;
-    white-space: nowrap;
-    img {
-        position: relative;
-        width: 9 * $ribbon-width;
-        left: -4 * $ribbon-width - 1px;
-        top: 20px;
-    }
+div.content h2 {
+    font-weight: 400;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #222;
 }
 
-.triangle-t, .triangle-b {
-    border-width: $ribbon-distance;
-    border-style: solid;
-    height: 0;
-    width: 0;
-    left: $ribbon-width - $ribbon-distance;
-}
-
-.triangle-t {
-    border-color: transparent transparent rgb(0,100,0) transparent;
-    top: 0;
-}
-
-.triangle-b {
-    border-color: rgb(0,100,0) transparent transparent transparent;
-    bottom: 2 * $ribbon-distance;
+div.content p {
+    font-weight: 400;
+    text-align: left;
+    padding-left: 20px;
 }
 
 /* =============================================================================
