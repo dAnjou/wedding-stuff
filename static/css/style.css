@@ -230,13 +230,15 @@ body {
   background-repeat: repeat;
   -webkit-box-shadow: 0 0 0 0 transparent, inset 0 0 30px 0 rgba(0, 200, 0, 0.5);
   -moz-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
+  -ms-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
+  -o-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
   box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5); }
 
 .main {
   position: relative;
   width: 550px;
   margin: 100px auto;
-  padding: 10px;
+  padding: 25px 15px;
   background-color: #fff;
   text-align: center;
   font-family: 'Numans', sans-serif;
@@ -244,6 +246,8 @@ body {
   font-size: 20px;
   -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4), inset 0 0 50px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.1); }
 
 .main:before, .main:after {
@@ -261,6 +265,8 @@ body {
   transform: rotate(-5deg) scale(1) skew(-5deg);
   -webkit-box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 0 transparent;
   -moz-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
+  -ms-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
+  -o-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   z-index: -1; }
 
@@ -273,6 +279,19 @@ body {
   -o-transform: rotate(5deg) scale(1) skew(5deg);
   transform: rotate(5deg) scale(1) skew(5deg); }
 
+h1, h2 {
+  font-weight: 400; }
+
+.main h1 {
+  margin-bottom: 0;
+  line-height: 1;
+  font-size: 55px; }
+
+.main span {
+  line-height: 1;
+  margin-bottom: 25px;
+  display: block; }
+
 div.stitch {
   padding: 5px;
   background-color: #008000;
@@ -283,15 +302,18 @@ div.stitch {
   border-radius: 3px 3px 3px 3px;
   -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px 35px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.2); }
 
 div.stitch h1 {
   border: 1px dashed #ddd;
   -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7), inset 2px 1px 6px 4px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.7), inset 2px 1px 6px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 0 3px rgba(0, 0, 0, 0.7), inset 2px 1px 6px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 0 3px rgba(0, 0, 0, 0.7), inset 2px 1px 6px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.7), inset 2px 1px 6px rgba(0, 0, 0, 0.1);
   font-family: 'Monsieur La Doulaise', cursive;
-  font-weight: 400;
   font-size: 60px;
   font-variant: normal;
   text-shadow: -1px -1px #444444;
@@ -308,17 +330,12 @@ div.stitch h1 {
 div.content {
   padding: 20px 10px; }
 
-div.content h1 {
-  font-weight: 400; }
-
 div.content h2 {
-  font-weight: 400;
   width: 100%;
   text-align: left;
   border-bottom: 1px solid #222; }
 
 div.content p {
-  font-weight: 400;
   text-align: left;
   padding-left: 20px; }
 

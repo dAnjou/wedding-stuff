@@ -77,12 +77,16 @@ td { vertical-align: top; }
 @mixin box-shadow($x, $y, $blur, $spread, $color, $inset_x: 0, $inset_y: 0, $inset_blur: 0, $inset_spread: 0, $inset_color: transparent) {
     -webkit-box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_spread $inset_color;
     -moz-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
+    -ms-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
+    -o-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
     box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
 }
 
 @mixin box-shadow-inset($x, $y, $blur, $color) {
     -webkit-box-shadow: inset $x $y $blur $color;
     -moz-box-shadow: inset $x $y $blur $color;
+    -ms-box-shadow: inset $x $y $blur $color;
+    -o-box-shadow: inset $x $y $blur $color;
     box-shadow: inset $x $y $blur $color;
 }
 
@@ -119,7 +123,7 @@ body {
     position: relative;
     width: 550px;
     margin: 100px auto;
-    padding: 10px;
+    padding: 25px 15px;
     background-color: #fff;
     text-align: center;
     font-family: 'Numans', sans-serif;
@@ -147,6 +151,22 @@ body {
     @include transform(rotate(5deg), scale(1), skew(5deg));
 }
 
+h1, h2 {
+    font-weight: 400;
+}
+
+.main h1 {
+    margin-bottom: 0;
+    line-height: 1;
+    font-size: 55px;
+}
+
+.main span {
+    line-height: 1;
+    margin-bottom: 25px;
+    display: block;
+}
+
 div.stitch {
     padding: 5px;
     background-color: #008000;
@@ -158,7 +178,6 @@ div.stitch h1 {
     border: 1px dashed #ddd;
     @include box-shadow(0, 0, 3px, 0, rgba(0, 0, 0, 0.7), 2px, 1px, 6px, 4px, rgba(0, 0, 0, 0.1));
     font-family: 'Monsieur La Doulaise', cursive;
-    font-weight: 400;
     font-size: 60px;
     font-variant: normal;
     text-shadow: -1px -1px #444;
@@ -173,19 +192,13 @@ div.content {
     padding: 20px 10px;
 }
 
-div.content h1 {
-    font-weight: 400;
-}
-
 div.content h2 {
-    font-weight: 400;
     width: 100%;
     text-align: left;
     border-bottom: 1px solid #222;
 }
 
 div.content p {
-    font-weight: 400;
     text-align: left;
     padding-left: 20px;
 }

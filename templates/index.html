@@ -1,10 +1,8 @@
-<!doctype html>
-<html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8">
+{% extends "base.html" %}
+        {% block head %}
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <title>Zeug</title>
+        {% block title %}Zeug{% endblock %}
 
         <meta name="viewport" content="width=device-width">
 
@@ -13,14 +11,15 @@
         <link rel="stylesheet" href="css/style.css">
 
         <script src="js/libs/modernizr-2.5.3.min.js"></script>
-    </head>
-    <body>
+        {% endblock %}
+        {% block body %}
         <div role="main" class="main">
+            <!--h1>Heirat</h1>
+            <span>von</span-->
             <div class="stitch">
                 <h1>Rebecca &amp; Patrick</h1>
             </div>
             <div class="content">
-                <h1>... heiraten ☺</h1>
                 <h2>Wann?</h2>
                 <p>Am Samstag, den 11. August 2012, um 12.45 Uhr.</p>
                 <h2>Wo?</h2>
@@ -32,6 +31,4 @@
         <footer>
 
         </footer>
-
-    </body>
-</html>
+        {% endblock %}
