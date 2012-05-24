@@ -228,7 +228,7 @@ body {
   background-color: #DDD;
   background-image: url("../img/paper.png");
   background-repeat: repeat;
-  -webkit-box-shadow: 0 0 0 0 transparent, inset 0 0 30px 0 rgba(0, 200, 0, 0.5);
+  -webkit-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
   -moz-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
   -ms-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
   -o-box-shadow: 0 0 0 transparent, inset 0 0 30px rgba(0, 200, 0, 0.5);
@@ -263,7 +263,7 @@ body {
   -ms-transform: rotate(-5deg) scale(1) skew(-5deg);
   -o-transform: rotate(-5deg) scale(1) skew(-5deg);
   transform: rotate(-5deg) scale(1) skew(-5deg);
-  -webkit-box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 0 transparent;
+  -webkit-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   -moz-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   -ms-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   -o-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;

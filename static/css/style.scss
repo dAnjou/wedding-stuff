@@ -76,10 +76,10 @@ td { vertical-align: top; }
 
 @mixin box-shadow($x, $y, $blur, $spread, $color, $inset_x: 0, $inset_y: 0, $inset_blur: 0, $inset_spread: 0, $inset_color: transparent) {
     -webkit-box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_spread $inset_color;
-    -moz-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
-    -ms-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
-    -o-box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
-    box-shadow: $x $y $blur $color, inset $inset_x $inset_y $inset_blur $inset_color;
+    -moz-box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_color;
+    -ms-box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_color;
+    -o-box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_color;
+    box-shadow: $x $y $blur $spread $color, inset $inset_x $inset_y $inset_blur $inset_color;
 }
 
 @mixin box-shadow-inset($x, $y, $blur, $color) {
@@ -104,6 +104,14 @@ td { vertical-align: top; }
     -ms-transform: $rotate $scale $skew;
     -o-transform: $rotate $scale $skew;
     transform: $rotate $scale $skew;
+}
+
+@mixin linear-gradient($where, $from, $to) {
+    background: $from;
+    background: -webkit-linear-gradient($where, $from, $to);
+    background: -moz-linear-gradient($where, $from, $to);
+    background: -ms-linear-gradient($where, $from, $to);
+    background: -o-linear-gradient($where, $from, $to);
 }
 
 body {
