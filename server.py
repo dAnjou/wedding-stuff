@@ -1,62 +1,72 @@
-from flask import Flask, render_template, jsonify, redirect
+import sqlite3
+
+from flask import Flask, render_template, jsonify, redirect, request, g
+from flask_frozen import Freezer
 
 import itertools
 import random
 import re
 
+# configuration
+DATABASE = 'wedding.db'
+DEBUG = True
+FREEZER_BASE_URL = 'http://danjou.github.com/wedding-stuff/'
+
 app = Flask(__name__)
+app.config.from_object(__name__)
+freezer = Freezer(app)
 
-list_of_quotes = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. 
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. 
-Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus. 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.""".split(".")
+@app.before_request
+def before_request():
+    g.db = sqlite3.connect(app.config['DATABASE'])
 
-coords = []
-last = (0, 0, 0)
-distance = 1000
-for i in range(len(list_of_quotes)):
-    c = (
-        random.randrange(last[0]+500, last[0]+distance, 50),
-        random.randrange(last[1]+500, last[1]+distance, 50),
-        random.randrange(last[2]-90, last[2]+90, 10)
-    )
-    coords.append(c)
-    last = c
-print coords
+@app.teardown_request
+def teardown_request(exception):
+    g.db.close()
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+    if request.method == "POST":
+        g.db.execute('insert into greets (author, message) values (?, ?)',
+            [request.form['from'], request.form['message']])
+        g.db.commit()
     return render_template("index.html")
 
-@app.route("/quotes")
-def quotes():
-    quotes = []
-    for i, q in enumerate(list_of_quotes):
-        quotes.append({
-            "text": q,
-            "x": coords[i][0],
-            "y": coords[i][1],
+@app.route("/greets/")
+def greets():
+    cur = g.db.execute('select author, message from greets order by id desc')
+    entries = [dict(author=row[0], message=row[1]) for row in cur.fetchall()]
+    greets = []
+    last = (0, 0, 0)
+    distance = 1000
+    for i, greet in enumerate(entries):
+        c = (
+            random.randrange(last[0]+500, last[0]+distance, 50),
+            random.randrange(last[1]+500, last[1]+distance, 50),
+            random.randrange(last[2]-90, last[2]+90, 10)
+        )
+        last = c
+        greets.append({
+            "greet": greet,
+            "x": c[0],
+            "y": c[1],
             "z": 0,
-            "rotate": coords[i][2],
+            "rotate": c[2],
             "scale": 1
         })
-    return render_template("quotes.html", quotes=quotes)
+    return render_template("greets.html", greets=greets)
 
-@app.route("/quote/", defaults={'index': 0})
-@app.route("/quote/<int:index>")
-def quote(index):
-    if index >= len(list_of_quotes):
-        index = index % len(list_of_quotes)
-        return redirect("/quote/%s" % index)
-    next = (index + 1) % len(list_of_quotes)
-    prev = (index - 1) % len(list_of_quotes)
-    return jsonify(quote=list_of_quotes[index], index=index, next=next, prev=prev)
+#@app.route("/greet/", defaults={'index': 0})
+#@app.route("/greet/<int:index>")
+#def greet(index):
+#    if index >= len(list_of_greets):
+#        index = index % len(list_of_greets)
+#        return redirect("/greet/%s" % index)
+#    next = (index + 1) % len(list_of_greets)
+#    prev = (index - 1) % len(list_of_greets)
+#    return jsonify(greet=list_of_greets[index], index=index, next=next, prev=prev)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    #sqlite3 wedding.db < schema.sql
+    freezer.freeze()
+    app.run()

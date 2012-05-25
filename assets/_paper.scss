@@ -1,0 +1,24 @@
+@mixin paper {
+    position: relative;
+    background-color: #fff;
+    @include box-shadow(0, 1px, 8px, 0, rgba(0, 0, 0, 0.4), 0, 0, 50px, 0, rgba(0, 0, 0, 0.1));
+
+    &:before, &:after {  
+        position: absolute;  
+        width: 40%;  
+        height: 10px;  
+        content: ' ';  
+        left: 12px;  
+        bottom: 12px;  
+        background: transparent;
+        @include transform(rotate(-5deg), scale(1), skew(-5deg));
+        @include box-shadow(0, 10px, 12px, 0, rgba(0, 0, 0, 0.5));
+        z-index: -1;  
+    }
+
+    &:after {  
+        left: auto;  
+        right: 12px;  
+        @include transform(rotate(5deg), scale(1), skew(5deg));
+    }
+}
