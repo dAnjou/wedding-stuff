@@ -1,7 +1,6 @@
 import sqlite3
 
 from flask import Flask, render_template, jsonify, redirect, request, g
-from flask_frozen import Freezer
 
 import itertools
 import random
@@ -10,11 +9,10 @@ import re
 # configuration
 DATABASE = 'wedding.db'
 DEBUG = True
-FREEZER_BASE_URL = 'http://danjou.github.com/wedding-stuff/'
+PREFIX = '/wedding-stuff'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-freezer = Freezer(app)
 
 @app.before_request
 def before_request():
@@ -24,7 +22,7 @@ def before_request():
 def teardown_request(exception):
     g.db.close()
 
-@app.route("/", methods=["GET", "POST"])
+@app.route(PREFIX + "/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         g.db.execute('insert into greets (author, message) values (?, ?)',
@@ -32,7 +30,7 @@ def index():
         g.db.commit()
     return render_template("index.html")
 
-@app.route("/greets/")
+@app.route(PREFIX + "/greets/")
 def greets():
     cur = g.db.execute('select author, message from greets order by id desc')
     entries = [dict(author=row[0], message=row[1]) for row in cur.fetchall()]
@@ -56,7 +54,7 @@ def greets():
         })
     return render_template("greets.html", greets=greets)
 
-#@app.route("/greet/", defaults={'index': 0})
+#@app.route(PREFIX + "/greet/", defaults={'index': 0})
 #@app.route("/greet/<int:index>")
 #def greet(index):
 #    if index >= len(list_of_greets):
@@ -68,5 +66,4 @@ def greets():
 
 if __name__ == "__main__":
     #sqlite3 wedding.db < schema.sql
-    freezer.freeze()
     app.run()
