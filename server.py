@@ -23,7 +23,7 @@ def index():
 
 @app.route(PREFIX + "/greets/")
 def greets():
-    entries = [dict(author=result["author"]["name"], message=result["message"]) for result in disqus.posts.list(forum="danjou-de")]
+    entries = [dict(author=result["author"]["name"], message=result["raw_message"]) for result in disqus.posts.list(forum="danjou-de")]
     greets = []
     last = (0, 0, 0)
     distance = 1000
