@@ -9,7 +9,6 @@ import re
 # configuration
 DATABASE = 'wedding.db'
 DEBUG = True
-PREFIX = '/wedding-stuff'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -17,11 +16,11 @@ secret_key = 'hmd9j30tyKfNZ5724TEQ4NZnYs1IzwtYS82kiAeIPcUjNdfsGElrBnlH5BxvAnY7'
 public_key = 'syFlngUecmMpaYYie6mXmFoXATUkeIwx1hqcvHirsAM5n48s5ajZCsivbRz2xQZR'
 disqus = DisqusAPI(secret_key, public_key)
 
-@app.route(PREFIX + "/")
+@app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route(PREFIX + "/greets/")
+@app.route("/greets/")
 def greets():
     entries = [dict(author=result["author"]["name"], message=result["raw_message"]) for result in disqus.posts.list(forum="danjou-de")]
     greets = []
@@ -44,7 +43,7 @@ def greets():
         })
     return render_template("greets.html", greets=greets)
 
-#@app.route(PREFIX + "/greet/", defaults={'index': 0})
+#@app.route("/greet/", defaults={'index': 0})
 #@app.route("/greet/<int:index>")
 #def greet(index):
 #    if index >= len(list_of_greets):
