@@ -1,6 +1,6 @@
-import sqlite3
-
 from flask import Flask, render_template, jsonify, redirect, request, g
+
+from disqusapi import DisqusAPI
 
 import itertools
 import random
@@ -13,27 +13,17 @@ PREFIX = '/wedding-stuff'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+secret_key = 'hmd9j30tyKfNZ5724TEQ4NZnYs1IzwtYS82kiAeIPcUjNdfsGElrBnlH5BxvAnY7'
+public_key = 'syFlngUecmMpaYYie6mXmFoXATUkeIwx1hqcvHirsAM5n48s5ajZCsivbRz2xQZR'
+disqus = DisqusAPI(secret_key, public_key)
 
-@app.before_request
-def before_request():
-    g.db = sqlite3.connect(app.config['DATABASE'])
-
-@app.teardown_request
-def teardown_request(exception):
-    g.db.close()
-
-@app.route(PREFIX + "/", methods=["GET", "POST"])
+@app.route(PREFIX + "/")
 def index():
-    if request.method == "POST":
-        g.db.execute('insert into greets (author, message) values (?, ?)',
-            [request.form['from'], request.form['message']])
-        g.db.commit()
     return render_template("index.html")
 
 @app.route(PREFIX + "/greets/")
 def greets():
-    cur = g.db.execute('select author, message from greets order by id desc')
-    entries = [dict(author=row[0], message=row[1]) for row in cur.fetchall()]
+    entries = [dict(author=result["author"]["name"], message=result["message"]) for result in disqus.posts.list(forum="danjou-de")]
     greets = []
     last = (0, 0, 0)
     distance = 1000
@@ -65,5 +55,4 @@ def greets():
 #    return jsonify(greet=list_of_greets[index], index=index, next=next, prev=prev)
 
 if __name__ == "__main__":
-    #sqlite3 wedding.db < schema.sql
     app.run()

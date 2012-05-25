@@ -20,14 +20,6 @@
             <p>Im Trauzimmer des Alten Rathauses in Suhl.</p>
             <h2>Und die Fete?</h2>
             <p>Direkt im Anschluss in der Klosterkapelle im BTZ Rohr. Beginn ist um 14.30 Uhr.</p>
-            <h2>Gruß hinterlassen</h2>
-            <p>
-                <form class="nice" action="{{ url_for('index') }}" method="POST">
-                    <input name="from" class="input-text" type="text" placeholder="Von" />
-                    <textarea name="message" class="expand"></textarea>
-                    <input type="submit" value="Absenden" class="nice large radius green button" /><a href="{{ url_for('greets') }}">Grüße ansehen</a>
-                </form>
-            </p>
         </div>
     </div>
 {% endblock %}
