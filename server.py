@@ -9,7 +9,6 @@ import re
 # configuration
 DATABASE = 'wedding.db'
 DEBUG = True
-PREFIX = '/wedding-stuff'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -22,7 +21,7 @@ def before_request():
 def teardown_request(exception):
     g.db.close()
 
-@app.route(PREFIX + "/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         g.db.execute('insert into greets (author, message) values (?, ?)',
@@ -30,7 +29,7 @@ def index():
         g.db.commit()
     return render_template("index.html")
 
-@app.route(PREFIX + "/greets/")
+@app.route("/greets/")
 def greets():
     cur = g.db.execute('select author, message from greets order by id desc')
     entries = [dict(author=row[0], message=row[1]) for row in cur.fetchall()]
@@ -54,7 +53,7 @@ def greets():
         })
     return render_template("greets.html", greets=greets)
 
-#@app.route(PREFIX + "/greet/", defaults={'index': 0})
+#@app.route("/greet/", defaults={'index': 0})
 #@app.route("/greet/<int:index>")
 #def greet(index):
 #    if index >= len(list_of_greets):

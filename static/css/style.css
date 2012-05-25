@@ -797,7 +797,7 @@ body {
     -o-transform: rotate(5deg) scale(1) skew(5deg);
     transform: rotate(5deg) scale(1) skew(5deg); }
 
-h1, h2 {
+h1, h2, h3 {
   font-weight: 400; }
 
 div.stitch {
