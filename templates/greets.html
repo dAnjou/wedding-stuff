@@ -9,11 +9,12 @@
     <link href='http://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block body %}
+    {#
     <div class="fallback-message">
-        <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
         <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
         <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
     </div>
+    #}
 
     <div id="impress">
         {% for q in greets %}
@@ -36,7 +37,7 @@
         </div>
     </div>
 
-    <!--
+    {#
         
         Hint is not related to impress.js in any way.
         
@@ -59,17 +60,17 @@
         
         Just sayin' ;)
         
-    -->
+    #}
     <div class="hint">
         <p>Benutze die Leertaste oder die Pfeiltasten, um durch die Grüße zu blättern.</p>
     </div>
     <script>
     if ("ontouchstart" in document.documentElement) { 
-        document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+        document.querySelector(".hint").innerHTML = "<p>Tippe auf die rechte oder linke Seite, um zu blättern.</p>";
     }
     </script>
 
-    <!--
+    {#
         
         Last, but not least.
         
@@ -82,8 +83,8 @@
         And you should do it in the end of your document. Not only because it's a good practice, but also
         because it should be done when the whole document is ready.
         Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
-        
-    -->
+
+    #}
     <script src="{{ url_for('static', filename='impress.js/js/impress.js')}}"></script>
     <script src="{{ url_for('static', filename='jquery/jquery-1.7.2.min.js')}}"></script>
     <script>
@@ -92,11 +93,11 @@
             api.init();
             var intervalID = setInterval(function() {
                 //api.next();
-            }, 0500);
+            }, 5000);
         });
     </script>
 
-    <!--
+    {#
         
         The `impress()` function also gives you access to the API that controls the presentation.
         
@@ -119,5 +120,5 @@
         For some example uses of this API check the last part of the source of impress.js where the API
         is used in event handlers.
         
-    -->
+    #}
 {% endblock %}
