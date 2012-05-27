@@ -34,13 +34,14 @@ def greets():
     cur = g.db.execute('select author, message from greets order by id desc')
     entries = [dict(author=row[0], message=row[1]) for row in cur.fetchall()]
     greets = []
-    last = (0, 0, 0)
-    distance = 1000
-    for i, greet in enumerate(entries):
+    last = (0, 0, 1)
+    distance = 600
+    greets.append({"greet": entries[0], "x": 0, "y": 0, "z": 0, "rotate": 0, "scale": 1})
+    for i, greet in enumerate(entries[1:]):
         c = (
-            random.randrange(last[0]+500, last[0]+distance, 50),
-            random.randrange(last[1]+500, last[1]+distance, 50),
-            random.randrange(last[2]-90, last[2]+90, 10)
+            last[0] + random.randrange(350, distance, 50),
+            last[1] + random.randrange(350, distance, 50),
+            last[2] * -1
         )
         last = c
         greets.append({
@@ -48,7 +49,7 @@ def greets():
             "x": c[0],
             "y": c[1],
             "z": 0,
-            "rotate": c[2],
+            "rotate": c[2] * random.randrange(15, 40, 5),
             "scale": 1
         })
     return render_template("greets.html", greets=greets)
