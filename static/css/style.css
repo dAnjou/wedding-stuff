@@ -743,7 +743,7 @@ body {
   border: 1px solid #999; */ }
 
 .main {
-  width: 550px;
+  max-width: 550px;
   margin: 100px auto;
   padding: 25px 15px;
   text-align: center;
