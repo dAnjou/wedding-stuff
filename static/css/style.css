@@ -693,16 +693,6 @@ form.custom.nice div.custom.dropdown ul {
   outline: none;
   margin: 0; }
 
-.button.nice {
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.28);
-  border: 1px solid #0593dc;
-  -webkit-transition: background-color .15s ease-in-out;
-  -moz-transition: background-color .15s ease-in-out;
-  -o-transition: background-color .15s ease-in-out; }
-
 .button.radius {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -713,14 +703,8 @@ form.custom.nice div.custom.dropdown ul {
   padding: 11px 48px 13px;
   width: auto; }
 
-.nice.large.button {
-  background-position: 0 -30px; }
-
 .green.button {
   background-color: #5b8737; }
-
-.nice.green.button {
-  border: 1px solid #4a6b2d; }
 
 .button:hover, .button:focus {
   background-color: #0192dd;
@@ -835,19 +819,31 @@ div.stitch {
 
 div.content {
   padding: 20px 10px; }
-  div.content h2 {
+  div.content h2, div.content h3 {
     width: 100%;
     text-align: left;
     border-bottom: 1px solid #222; }
   div.content p {
     text-align: left;
     padding-left: 20px; }
+  div.content blockquote {
+    margin: 0;
+    padding: 0; }
+    div.content blockquote p {
+      white-space: pre; }
+  div.content p.author {
+    padding-right: 20px;
+    text-align: right;
+    font-style: italic; }
 
-form.nice input.input-text, form.nice textarea {
+form.nice input.input-text, form.nice textarea, form.nice a, form.nice input[type=submit] {
   font-family: 'Numans', sans-serif;
   font-variant: small-caps;
+  line-height: normal !important; }
+form.nice input.input-text, form.nice textarea {
   font-size: 20px; }
 form.nice textarea {
   height: 200px; }
 form.nice a {
+  color: #fff;
   margin-left: 20px; }

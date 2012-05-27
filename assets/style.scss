@@ -64,7 +64,7 @@ div.stitch {
 
 div.content {
     padding: 20px 10px;
-    h2 {
+    h2, h3 {
         width: 100%;
         text-align: left;
         border-bottom: 1px solid #222;
@@ -73,18 +73,35 @@ div.content {
         text-align: left;
         padding-left: 20px;
     }
+    blockquote {
+        margin: 0;
+        padding: 0;
+        p {
+            white-space: pre;
+        }
+    }
+    p.author {
+        padding-right: 20px;
+        text-align: right;
+        font-style: italic;
+    }
 }
 
+
 form.nice {
-    input.input-text, textarea {
+    input.input-text, textarea, a, input[type=submit] {
         font-family: 'Numans', sans-serif;
         font-variant: small-caps;
+        line-height: normal !important; // fuckin* Firefox applies some space around input button text
+    }
+    input.input-text, textarea {
         font-size: 20px;
     }
     textarea {
         height: 200px;
     }
     a {
+        color: #fff;
         margin-left: 20px;
     }
 }

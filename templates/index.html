@@ -20,11 +20,20 @@
             <p>Im Trauzimmer des Alten Rathauses in Suhl.</p>
             <h2>Und die Fete?</h2>
             <p>Direkt im Anschluss in der Klosterkapelle im BTZ Rohr. Beginn ist um 14.30 Uhr.</p>
-            <h2>Gruß hinterlassen</h2>
+            <h2>{% if mobile %}Grüße{% else %}Hinterlasse einen Gruß{% endif %}</h2>
+            {% if mobile %}   
+                {% for q in greets %}
+                    <blockquote>
+                        <p class="message">{{ q.message }}</p>
+                    </blockquote>
+                    <p class="author">— {{ q.author }}</p>
+                {% endfor %}
+                <h3>Hinterlasse selbst einen Gruß</h3>
+            {% endif %}
             <form class="nice" action="{{ url_for('index') }}" method="POST">
                 <input name="from" class="input-text" type="text" placeholder="Von" />
                 <textarea name="message" class="expand"></textarea>
-                <input type="submit" value="Absenden" class="nice large radius green button" /><a href="{{ url_for('greets') }}">Grüße ansehen</a>
+                <input type="submit" value="Absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
             </form>
         </div>
     </div>

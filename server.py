@@ -23,7 +23,11 @@ def index():
         g.db.execute('insert into greets (author, message) values (?, ?)',
             [request.form['from'], request.form['message']])
         g.db.commit()
-    return render_template("index.html")
+    if request.user_agent.platform in ["android", "iphone"]:
+        cur = g.db.execute('select author, message from greets order by id desc')
+        entries = [dict(author=row[0], message=row[1]) for row in cur.fetchall()]
+        return render_template("index.html", greets=entries, mobile=True)
+    return render_template("index.html", greets=[], mobile=False)
 
 @app.route("/greets/")
 def greets():

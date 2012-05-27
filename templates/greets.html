@@ -52,7 +52,7 @@
     <div id="impress">
         {% for q in greets %}
             {% if loop.first %}
-                <div id="bored" class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
+                <div id="bored" class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="0" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
             {% else %}
                 <div class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
             {% endif %}
