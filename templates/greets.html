@@ -2,7 +2,8 @@
 {% block title %}Grüße{% endblock %}
 {% block head %}
     {{ super() }}
-    <meta name="viewport" content="width=1024" />
+    {#<meta name="viewport" content="width=1024" />#}
+    <meta name="viewport" content="width=device-width" />
     <link href="{{ url_for('static', filename='css/impress.css')}}" rel="stylesheet" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='impress.js/favicon.png')}}" />
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='impress.js/apple-touch-icon.png')}}" />
@@ -15,27 +16,6 @@
         <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
     </div>
     #}
-
-    <div id="impress">
-        {% for q in greets %}
-            {% if loop.first %}
-                <div id="bored" class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
-            {% else %}
-                <div class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
-            {% endif %}
-                <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
-                <div class="paper">
-                    <blockquote>
-                        <p class="message">{{ q.greet.message }}</p>
-                    </blockquote>
-                    <p class="author">— {{ q.greet.author }}</p>
-                </div>
-            </div>
-        {% endfor %}
-
-        <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
-        </div>
-    </div>
 
     {#
         
@@ -69,6 +49,27 @@
         document.querySelector(".hint").innerHTML = "<p>Tippe auf die rechte oder linke Seite, um zu blättern.</p>";
     }
     </script>
+
+    <div id="impress">
+        {% for q in greets %}
+            {% if loop.first %}
+                <div id="bored" class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
+            {% else %}
+                <div class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
+            {% endif %}
+                <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
+                <div class="paper">
+                    <blockquote>
+                        <p class="message">{{ q.greet.message }}</p>
+                    </blockquote>
+                    <p class="author">— {{ q.greet.author }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+        </div>
+    </div>
 
     {#
         
