@@ -10,7 +10,7 @@
 {% endblock %}
 {% block body %}
     <div class="fallback-message">
-        <a href="{{ url_for('index') }}">Zurück</a>
+        <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
         <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
         <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
     </div>
@@ -22,7 +22,7 @@
             {% else %}
                 <div class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
             {% endif %}
-                <a href="{{ url_for('index') }}">Zurück</a>
+                <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
                 <div class="paper">
                     <blockquote>
                         <p class="message">{{ q.greet.message }}</p>
