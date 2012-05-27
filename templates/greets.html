@@ -2,8 +2,7 @@
 {% block title %}Grüße{% endblock %}
 {% block head %}
     {{ super() }}
-    {#<meta name="viewport" content="width=1024" />#}
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=800, height=device-height" />
     <link href="{{ url_for('static', filename='css/impress.css')}}" rel="stylesheet" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='impress.js/favicon.png')}}" />
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='impress.js/apple-touch-icon.png')}}" />
