@@ -6,12 +6,8 @@ import itertools
 import random
 import re
 
-# configuration
-DATABASE = 'wedding.db'
-DEBUG = True
-
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_envvar('WEDDING_SETTINGS')
 
 @app.before_request
 def before_request():
@@ -53,16 +49,5 @@ def greets():
         })
     return render_template("greets.html", greets=greets)
 
-#@app.route("/greet/", defaults={'index': 0})
-#@app.route("/greet/<int:index>")
-#def greet(index):
-#    if index >= len(list_of_greets):
-#        index = index % len(list_of_greets)
-#        return redirect("/greet/%s" % index)
-#    next = (index + 1) % len(list_of_greets)
-#    prev = (index - 1) % len(list_of_greets)
-#    return jsonify(greet=list_of_greets[index], index=index, next=next, prev=prev)
-
 if __name__ == "__main__":
-    #sqlite3 wedding.db < schema.sql
     app.run()
