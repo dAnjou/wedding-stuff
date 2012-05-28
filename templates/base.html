@@ -4,10 +4,22 @@
         {% block head %}
             <meta charset="utf-8" />
     		<title>{% block title %}{% endblock %}</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='foundation/stylesheets/foundation.css')}}">
+            <!--[if lt IE 9]>
+                <link rel="stylesheet" href="{{ url_for('static', filename='foundation/stylesheets/ie.css')}}">
+            <![endif]-->
+            <script src="{{ url_for('static', filename='foundation/javascripts/modernizr.foundation.js')}}"></script>
+            <!-- IE Fix for HTML5 Tags -->
+            <!--[if lt IE 9]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
         {% endblock %}
     </head>
     <body class="impress-not-supported">
         {% block body %}
+        {% endblock %}
+        {% block javascript %}
+            <script src="{{ url_for('static', filename='jquery/jquery-1.7.2.min.js')}}"></script>
         {% endblock %}
     </body>
 </html>
