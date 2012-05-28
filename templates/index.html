@@ -8,32 +8,50 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block body %}
-    <div class="main paper">
-        <div class="stitch">
-            <h1>Rebecca &amp; Patrick</h1>
+    <ul class="flashes">
+        {% for message in messages %}
+            <li><div class="alert-box {{ message[1] }}">{{ message[0] }}<a href="#" class="close">&times;</a></div></li>
+        {% endfor %}
+    </ul>
+    <div class="container paper">
+        <div class="row">
+            <div class="twelve colums">
+                <div class="stitch">
+                    <h1>Rebecca &amp; Patrick</h1>
+                </div>
+            </div>
         </div>
-        <div class="content">
-            <h2>Wann?</h2>
-            <p>Am Samstag, den 11. August 2012, um 12.45 Uhr.</p>
-            <h2>Wo?</h2>
-            <p>Im Trauzimmer des Alten Rathauses in Suhl.</p>
-            <h2>Und die Fete?</h2>
-            <p>Direkt im Anschluss in der Klosterkapelle im BTZ Rohr. Beginn ist um 14.30 Uhr.</p>
-            <h2>{% if mobile %}Grüße{% else %}Hinterlasse einen Gruß{% endif %}</h2>
-            {% if mobile %}   
-                {% for q in greets %}
-                    <blockquote>
-                        <p class="message">{{ q.message }}</p>
-                    </blockquote>
-                    <p class="author">— {{ q.author }}</p>
-                {% endfor %}
-                <h3>Hinterlasse selbst einen Gruß</h3>
-            {% endif %}
-            <form class="nice" action="{{ url_for('index') }}" method="POST">
-                <input name="from" class="input-text" type="text" placeholder="Von" />
-                <textarea name="message" class="expand"></textarea>
-                <input type="submit" value="Absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
-            </form>
+        <div class="row">
+            <div class="six columns">
+                <div class="content">
+                    <h2>Wann?</h2>
+                    <p>Am Samstag, den 11. August 2012, um 12.45 Uhr.</p>
+                    <h2>Wo?</h2>
+                    <p>Im Trauzimmer des Alten Rathauses in Suhl.</p>
+                    <h2>Und die Fete?</h2>
+                    <p>Direkt im Anschluss in der Klosterkapelle im BTZ Rohr. Beginn ist um 14.30 Uhr.</p>
+                </div>
+            </div>
+            <div class="six columns">
+                <div class="content">
+                    <h2>{% if mobile %}Grüße{% else %}Hinterlasse einen Gruß{% endif %}</h2>
+                    {% if mobile %}   
+                        {% for q in greets %}
+                            <blockquote>
+                                <p class="message">{{ q.message }}</p>
+                            </blockquote>
+                            <p class="author">— {{ q.author }}</p>
+                        {% endfor %}
+                        <h3>Hinterlasse selbst einen Gruß</h3>
+                    {% endif %}
+                    <form class="nice" action="{{ url_for('index') }}" method="POST">
+                        <textarea name="message" class="expand" placeholder="deine Nachricht" rows="5"></textarea>
+                        <input name="from" class="input-text" type="text" placeholder="dein Name" />
+                        <p id="maximum">Überschreite bitte nicht 140 Zeichen und 5 Zeilen für deine Nachricht.</p>
+                        <input type="submit" value="Absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -41,4 +59,37 @@
     {{ super() }}
     <script src="{{ url_for('static', filename='foundation/javascripts/foundation.js')}}"></script>
     <script src="{{ url_for('static', filename='foundation/javascripts/app.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            function message_is_ok() {
+                return true;
+
+                var line_count = $('textarea[name="message"]').val().split("\n").length;
+                if (line_count > 5)
+                    return false;
+                var text_length = $('textarea[name="message"]').val().length - line_count;
+                console.log(text_length)
+                if (text_length > 140)
+                    return false;
+                return true;
+            }
+
+            $("form").submit(function(e) {
+                if (message_is_ok()) {
+                    console.log("ok");
+                    return true;
+                }
+                console.log("not ok");
+                return false;
+            })
+
+        });
+    </script>
 {% endblock %}
+
+{#
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+#}

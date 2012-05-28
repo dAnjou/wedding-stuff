@@ -1,41 +1,27 @@
 @import "utils";
 @import "paper";
-@import "forms";
 
 body {
     background-color: #DDD;
     background-image: url("../img/paper.png");
     background-repeat: repeat;
-    /* @include box-shadow(0, 0, 0, 0, transparent, 0, 0, 30px, 0, rgba(0,200,0,0.5));
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid #999; */
+    color: #181818;
 }
 
-.main {
-    max-width: 550px;
-    margin: 100px auto;
+.container {
+    max-width: 960px;
+    margin: 20px auto;
+}
+
+.flashes {
+    max-width: 960px;
+    margin: 80px auto 0 auto;
+}
+
+.paper {
     padding: 25px 15px;
     text-align: center;
-    font-family: 'Numans', sans-serif;
-    font-variant: small-caps;
-    font-size: 20px;
     @include paper;
-    /*
-    h1 {
-        margin-bottom: 0;
-        line-height: 1;
-        font-size: 55px;
-    }
-    span {
-        line-height: 1;
-        margin-bottom: 25px;
-        display: block;
-    }
-    */
 }
 
 h1, h2, h3 {
@@ -45,6 +31,7 @@ h1, h2, h3 {
 div.stitch {
     padding: 5px;
     background-color: #008000;
+    // background-color: rgb(180, 210, 90);
     @include border-radius(3px, 3px, 3px, 3px);
     @include box-shadow(0, 0, 0, 0, rgba(0, 0, 0, 0.4), 0, 0, 35px, 35px, rgba(0, 0, 0, 0.2));
     h1 {
@@ -64,13 +51,17 @@ div.stitch {
 
 div.content {
     padding: 20px 10px;
-    h2, h3 {
-        width: 100%;
+    h2, h3, p {
+        font-family: 'Numans', sans-serif;
+        font-variant: small-caps;
+        font-size: 20px;
         text-align: left;
+    }
+    h2, h3 {
+        font-size: 25px;
         border-bottom: 1px solid #222;
     }
     p {
-        text-align: left;
         padding-left: 20px;
     }
     blockquote {
@@ -92,16 +83,23 @@ form.nice {
     input.input-text, textarea, a, input[type=submit] {
         font-family: 'Numans', sans-serif;
         font-variant: small-caps;
-        line-height: normal !important; // fuckin* Firefox applies some space around input button text
+        font-weight: 400;
     }
     input.input-text, textarea {
         font-size: 20px;
     }
     textarea {
-        height: 200px;
+        height: 140px;
+        resize: none;
     }
     a {
-        color: #fff;
         margin-left: 20px;
+    }
+    p#maximum {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 5px;
+        font-style: italic;
+        font-size: 15px;
     }
 }

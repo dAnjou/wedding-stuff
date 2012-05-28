@@ -3,6 +3,7 @@
 {% block head %}
     {{ super() }}
     <meta name="viewport" content="width=800" />
+    <link href="http://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/impress.css')}}" rel="stylesheet" />
 {% endblock %}
 {% block body %}
@@ -56,7 +57,7 @@
                 <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
                 <div class="paper">
                     <blockquote>
-                        <p class="message">{{ q.greet.message }}</p>
+                        <p class="message">{{ q.greet.message | nl2br }}</p>
                     </blockquote>
                     <p class="author">— {{ q.greet.author }}</p>
                 </div>

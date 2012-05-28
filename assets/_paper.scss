@@ -11,14 +11,14 @@
         left: 12px;  
         bottom: 12px;  
         background: transparent;
-        @include transform(rotate(-5deg), scale(1), skew(-5deg));
-        @include box-shadow(0, 10px, 12px, 0, rgba(0, 0, 0, 0.5));
+        @include transform(rotate(-3deg), scale(1), skew(-5deg));
+        @include box-shadow(0, 10px, 20px, 0, rgba(0, 0, 0, 0.8));
         z-index: -1;  
     }
 
     &:after {  
         left: auto;  
         right: 12px;  
-        @include transform(rotate(5deg), scale(1), skew(5deg));
+        @include transform(rotate(3deg), scale(1), skew(5deg));
     }
 }

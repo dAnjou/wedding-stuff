@@ -94,8 +94,6 @@ i, em { font-style: italic }
     -o-box-sizing:      border-box;
     box-sizing:         border-box;
     .paper {
-        font-size: 48px;
-        line-height: 1.5;
         width: 750px;
         margin: 20px auto;
         padding: 40px;
@@ -108,12 +106,15 @@ i, em { font-style: italic }
             @include transform(rotate(2deg), scale(1), skew(2deg));
         }
         blockquote, blockquote p.message, p.author {
+            border-width: 0;
+            line-height: 1.5;
             text-shadow: -1px -1px #444;
             color: #006600;
             margin: 0;
+            padding: 0;
+            font-size: 48px;
         }
         p.author {
-            width: 100%;
             font-size: 38px;
             font-style: italic;
             text-align: right;
@@ -240,8 +241,9 @@ i, em { font-style: italic }
     background: rgba(0,0,0,0.5);
     color: #EEE;
     text-align: center;
-    
-    font-size: 30px;
+    p {
+        font-size: 30px;
+    }
     padding: 20px;
     
     z-index: 100;
