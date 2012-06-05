@@ -88,7 +88,18 @@
                 <ul class="contained tabs-content">
                     <li class="active" id="nice0Tab" style="color: grey; margin: 0; padding: 3px 10px; text-align: left;">Klicke auf einen der anderen Tabs, um andere Farben auszutesten.</li>
                     <li id="nice1Tab"><div id="heading-bg"></div></li>
-                    <li id="nice2Tab"><div id="heading-text"></div></li>
+                    <li id="nice2Tab">
+                        <div class="row">
+                            <div class="five columns">
+                                <h6>Schriftfarbe</h6>
+                                <div id="heading-text"></div>
+                            </div>
+                            <div class="five columns end">
+                                <h6>Schattenfarbe</h6>
+                                <div id="heading-text-shadow"></div>
+                            </div>
+                        </div>
+                    </li>
                     <li id="nice3Tab"><div id="button-send"></div></li>
                     <li id="nice4Tab"><div id="button-view"></div></li>
                 </ul>
@@ -104,37 +115,25 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            $('#heading-bg').ColorPicker({
-                flat: true,
-                color: '#008000',
-                onChange: function (hsb, hex, rgb) {
-                    $('div.stitch').css('background-color', '#' + hex);
-                }
-            });
+            function add_colorpicker(node, obj, property, color, before, after) {
+                if (!before)
+                    before = ''
+                if (!after)
+                    after = ''
+                $(node).ColorPicker({
+                    flat: true,
+                    color: color,
+                    onChange: function (hsb, hex, rgb) {
+                        $(obj).css(property, before + ' #' + hex + ' ' + after);
+                    }
+                });
+            }
 
-            $('#heading-text').ColorPicker({
-                flat: true,
-                color: '#DDDDDD',
-                onChange: function (hsb, hex, rgb) {
-                    $('div.stitch h1').css('color', '#' + hex);
-                }
-            });
-
-            $('#button-send').ColorPicker({
-                flat: true,
-                color: '#5B8737',
-                onChange: function (hsb, hex, rgb) {
-                    $('input.green.button').css('background-color', '#' + hex);
-                }
-            });
-
-            $('#button-view').ColorPicker({
-                flat: true,
-                color: '#00A6FC',
-                onChange: function (hsb, hex, rgb) {
-                    $('a.button').css('background-color', '#' + hex);
-                }
-            });
+            add_colorpicker('#heading-bg', 'div.stitch', 'background-color', '#008000');
+            add_colorpicker('#heading-text', 'div.stitch h1', 'color', '#dddddd');
+            add_colorpicker('#heading-text-shadow', 'div.stitch h1', 'text-shadow', '#444444', '', '-1px -1px');
+            add_colorpicker('#button-send', 'input.green.button', 'background-color', '#5B8737');
+            add_colorpicker('#button-view', 'a.button', 'background-color', '#00A6FC');
 
             function message_is_ok() {
                 return true;
