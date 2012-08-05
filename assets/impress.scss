@@ -285,9 +285,9 @@ i, em { font-style: italic }
 .impress-enabled .hint { display: block }
 
 /*
-    ... and we will show it when the first step (with id 'bored') is active.
+    ... and we will show it when the first step (with id 'slide1') is active.
 */
-.impress-on-bored .hint {
+.impress-on-slide1 .hint {
     /*
         We remove the transparency and position the hint in its default fixed
         position.

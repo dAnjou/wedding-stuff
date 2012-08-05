@@ -1,0 +1,11 @@
+{% for q in greets %}
+    <div id="slide{{ q.greet.id }}" class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
+        <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
+        <div class="paper">
+            <blockquote>
+                <p class="message">{{ q.greet.message | nl2br }}</p>
+            </blockquote>
+            <p class="author">— {{ q.greet.author }}</p>
+        </div>
+    </div>
+{% endfor %}

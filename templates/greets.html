@@ -48,24 +48,9 @@
     </script>
 
     <div id="impress">
-        {% for q in greets %}
-            {% if loop.first %}
-                <div id="bored" class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="0" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
-            {% else %}
-                <div class="step" data-x="{{ q.x }}" data-y="{{ q.y }}" data-rotate="{{ q.rotate }}" data-z="{{ q.z }}" data-scale="{{ q.scale }}">
-            {% endif %}
-                <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
-                <div class="paper">
-                    <blockquote>
-                        <p class="message">{{ q.greet.message | nl2br }}</p>
-                    </blockquote>
-                    <p class="author">— {{ q.greet.author }}</p>
-                </div>
-            </div>
-        {% endfor %}
-
-        <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
-        </div>
+        <!--div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+        </div-->
+        {% include 'greet.html' %}
     </div>
 {% endblock %}
 {% block javascript %}
@@ -91,7 +76,17 @@
             var api = impress();
             api.init();
             var intervalID = setInterval(function() {
-                //api.next();
+                var lastid = $("#impress .step").last().attr("id").split("slide")[1];
+                $.get("{{ url_for('are_there_new_greets') }}", {lastid: lastid},
+                    function(data){
+                        if (data === "yes") {
+                            window.location.href = "{{ request.base_url }}#/slide" + lastid;
+                            window.location.reload();
+                        } else {
+                            api.next();
+                        }
+                    }
+                ).error(function() { api.next(); });
             }, 5000);
         });
     </script>
