@@ -5,7 +5,7 @@ from flask import Flask, render_template, jsonify, redirect, request, Markup, es
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from sqlalchemy import desc
+from sqlalchemy import desc, asc
 import itertools
 import random
 import re
@@ -46,9 +46,7 @@ def index():
         return render_template('index.html', greets=entries, mobile=True, messages=messages)
     return render_template('index.html', greets=[], mobile=False, messages=messages)
 
-@app.route('/greets/')
-def greets():
-    entries = Greet.query.order_by(desc(Greet.id))
+def make_greets(entries):
     greets = []
     if entries.first():
         last = (0, 0, 1)
@@ -69,6 +67,12 @@ def greets():
                 'rotate': c[2] * random.randrange(15, 40, 5),
                 'scale': 1
             })
+    return greets
+
+@app.route('/greets/')
+def greets():
+    entries = Greet.query.order_by(asc(Greet.id))
+    greets = make_greets(entries)
     return render_template('greets.html', greets=greets)
 
 @app.route('/latestgreets/<lastid>')
