@@ -71,5 +71,20 @@ def greets():
             })
     return render_template('greets.html', greets=greets)
 
+@app.route('/latestgreets/<lastid>')
+def latest_greets(lastid):
+    entries = Greet.query.filter(Greet.id > lastid).order_by(asc(Greet.id))
+    greets = make_greets(entries)
+    return render_template('greet.html', greets=greets)
+
+@app.route('/aretherenewgreets/', defaults={'lastid': None})
+@app.route('/aretherenewgreets/<int:lastid>')
+def are_there_new_greets(lastid):
+    if not lastid:
+        lastid = request.args.get('lastid', default=-1, type=int)
+    if not lastid == -1 and Greet.query.filter(Greet.id > lastid).first():
+        return "yes"
+    return "no"
+
 if __name__ == '__main__':
     app.run()
