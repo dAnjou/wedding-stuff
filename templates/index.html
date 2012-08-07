@@ -40,7 +40,7 @@
                         {% for q in greets %}
                             {% if q.is_image %}
                                 <p class="image">
-                                    <img src="{{ url_for('uploaded_file', filename=q.image) }}" />
+                                    <a href="{{ url_for('uploaded_file', filename=q.image) }}">Bild</a>
                                 </p>
                             {% else %}
                                 <blockquote>
