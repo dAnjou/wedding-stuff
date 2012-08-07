@@ -4,6 +4,7 @@
 from flask import Flask, render_template, jsonify, redirect, request, Markup, escape, Response
 
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.uploads import UploadSet, IMAGES
 
 from sqlalchemy import desc, asc
 import itertools
@@ -13,6 +14,7 @@ import re
 app = Flask(__name__)
 app.config.from_envvar('WEDDING_SETTINGS')
 db = SQLAlchemy(app)
+photos = UploadSet('photos', IMAGES, default_dest='/tmp')
 
 class Greet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,17 +37,22 @@ def nl2br(value):
 def index():
     messages = []
     if request.method == 'POST':
-        author = request.form['from']
-        message = request.form['message']
-        if len(''.join(message.split('\n'))) > 140 or len(message.split('\n')) > 5:
-            messages.append(("Deine Nachricht war leider zu lang.", 'error'))
+        greet = Greet()
+        if 'photo' in request.files:
+            filename = photos.save(request.files['photo'])
+            greet.is_image = True
+            greet.image = filename
         else:
-            greet = Greet()
-            greet.author = author
-            greet.message = message
-            db.session.add(greet)
-            db.session.commit()
-            messages.append(("Deine Nachricht ist angekommen! Danke.", 'success'))
+            author = request.form['from']
+            message = request.form['message']
+            if len(''.join(message.split('\n'))) > 140 or len(message.split('\n')) > 5:
+                messages.append(("Deine Nachricht war leider zu lang.", 'error'))
+            else:
+                greet.author = author
+                greet.message = message
+        db.session.add(greet)
+        db.session.commit()
+        messages.append(("Deine Nachricht ist angekommen! Danke.", 'success'))
     if request.user_agent.platform in ['android', 'iphone']:
         entries = Greet.query.order_by(desc(Greet.id))
         return render_template('index.html', greets=entries, mobile=True, messages=messages)
