@@ -49,28 +49,36 @@
                             {% endif %}
                             <hr>
                         {% endfor %}
-                        <h3>Hinterlasse selbst einen Gruß</h3>
+                        <h3>Hinterlasse selbst einen Gruß ...</h3>
                     {% endif %}
+                    {% if not mobile %}
                     <dl class="contained tabs">
                         <dd><a href="#text" class="active">Text</a></dd>
                         <dd><a href="#bild">Bild</a></dd>
                     </dl>
                     <ul class="contained tabs-content">
                         <li class="active" id="textTab" style="padding: 10px;">
+                    {% endif %}
                             <form class="nice" action="{{ url_for('index') }}" method="POST">
                                 <textarea name="message" class="expand" placeholder="deine Nachricht" rows="5"></textarea>
                                 <input name="from" class="input-text" type="text" placeholder="dein Name" />
                                 <p id="maximum">Überschreite bitte nicht 140 Zeichen und 5 Zeilen für deine Nachricht.</p>
-                                <input type="submit" value="Absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
+                                <input type="submit" value="Gruß absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
                             </form>
+                    {% if not mobile %}
                         </li>
                         <li id="bildTab" style="padding: 10px;">
+                    {% else %}
+                        <h3>... oder ein Bild</h3>
+                    {% endif %}
                             <form class="nice" action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
                                 <input name="photo" class="input-text expand" type="file">
-                                <input type="submit" value="Absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
+                                <input type="submit" value="Bild absenden" class="large radius green button" />{% if not mobile %}<a class="large radius button" href="{{ url_for('greets') }}">Grüße ansehen</a>{% endif %}
                             </form>
+                    {% if not mobile %}
                         </li>
                     </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -79,7 +87,9 @@
 {% block javascript %}
     {{ super() }}
     <script src="{{ url_for('static', filename='foundation/javascripts/foundation.js')}}"></script>
-    <script src="{{ url_for('static', filename='foundation/javascripts/app.js')}}"></script>
+    {% if not mobile %}
+        <script src="{{ url_for('static', filename='foundation/javascripts/app.js')}}"></script>
+    {% endif %}
     <script type="text/javascript">
         $(document).ready(function(){
 
