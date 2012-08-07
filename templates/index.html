@@ -38,10 +38,17 @@
                     <h2>{% if mobile %}Grüße{% else %}Hinterlasse einen Gruß{% endif %}</h2>
                     {% if mobile %}   
                         {% for q in greets %}
-                            <blockquote>
-                                <p class="message">{{ q.message }}</p>
-                            </blockquote>
-                            <p class="author">— {{ q.author }}</p>
+                            {% if q.is_image %}
+                                <p class="image">
+                                    <img src="{{ url_for('uploaded_file', filename=q.image) }}" />
+                                </p>
+                            {% else %}
+                                <blockquote>
+                                    <p class="message">{{ q.message }}</p>
+                                </blockquote>
+                                <p class="author">— {{ q.author }}</p>
+                            {% endif %}
+                            <hr>
                         {% endfor %}
                         <h3>Hinterlasse selbst einen Gruß</h3>
                     {% endif %}

@@ -64,6 +64,13 @@ div.content {
     p {
         padding-left: 20px;
     }
+    p.image {
+        text-align: center;
+        img {
+            max-width: 600px;
+            max-height: 500px;
+        }
+    }
     blockquote {
         margin: 0;
         padding: 0;

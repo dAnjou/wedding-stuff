@@ -66,7 +66,7 @@ def index():
         db.session.commit()
         messages.append(("Deine Nachricht ist angekommen! Danke.", 'success'))
     if request.user_agent.platform in ['android', 'iphone']:
-        entries = Greet.query.order_by(desc(Greet.id))
+        entries = Greet.query.order_by(asc(Greet.id))
         return render_template('index.html', greets=entries, mobile=True, messages=messages)
     return render_template('index.html', greets=[], mobile=False, messages=messages)
 

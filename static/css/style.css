@@ -99,6 +99,11 @@ div.content {
     border-bottom: 1px solid #222; }
   div.content p {
     padding-left: 20px; }
+  div.content p.image {
+    text-align: center; }
+    div.content p.image img {
+      max-width: 600px;
+      max-height: 500px; }
   div.content blockquote {
     margin: 0;
     padding: 0; }
