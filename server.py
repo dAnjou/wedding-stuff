@@ -16,8 +16,13 @@ db = SQLAlchemy(app)
 
 class Greet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String(80))
-    message = db.Column(db.String(150))
+    author = db.Column(db.String(80), nullable=True)
+    message = db.Column(db.String(150), nullable=True)
+    is_image = db.Column(db.Boolean)
+    image = db.Column(db.String, nullable=True)
+
+    def __init__(self, is_image=False):
+        self.is_image = is_image
 
     def __repr__(self):
         return '<Greet %r %r>' % (self.author, self.message[:5])
