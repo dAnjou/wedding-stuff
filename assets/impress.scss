@@ -94,7 +94,7 @@ i, em { font-style: italic }
     -o-box-sizing:      border-box;
     box-sizing:         border-box;
     .paper {
-        width: 750px;
+        width: 700px;
         margin: 20px auto;
         padding: 40px;
         @include paper;
@@ -104,6 +104,15 @@ i, em { font-style: italic }
         }
         &:after {
             @include transform(rotate(2deg), scale(1), skew(2deg));
+        }
+        p.image {
+            text-align: center;
+            img {
+                max-width: 700px;
+                max-height: 500px;
+                filter: alpha(opacity=30);
+                opacity: 0.3;
+            }
         }
         blockquote, blockquote p.message, p.author {
             border-width: 0;
@@ -154,6 +163,10 @@ i, em { font-style: italic }
         @include box-shadow(0, 1px, 8px, 0, rgba(0, 50, 0, 0.4), 0, 0, 50px, 0, rgba(0, 50, 0, 0.1));
         &:before, &:after {  
             @include box-shadow(0, 10px, 12px, 0, rgba(0, 50, 0, 0.5));
+        }
+        p.image img {
+            filter: alpha(opacity=100);
+            opacity: 1;
         }
         p {
             @include transition(all, 1s);

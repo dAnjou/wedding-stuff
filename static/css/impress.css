@@ -87,7 +87,7 @@ i, em {
   -o-box-sizing: border-box;
   box-sizing: border-box; }
   .step .paper {
-    width: 750px;
+    width: 700px;
     margin: 20px auto;
     padding: 40px;
     position: relative;
@@ -137,6 +137,13 @@ i, em {
       -ms-transform: rotate(2deg) scale(1) skew(2deg);
       -o-transform: rotate(2deg) scale(1) skew(2deg);
       transform: rotate(2deg) scale(1) skew(2deg); }
+    .step .paper p.image {
+      text-align: center; }
+      .step .paper p.image img {
+        max-width: 700px;
+        max-height: 500px;
+        filter: alpha(opacity=30);
+        opacity: 0.3; }
     .step .paper blockquote, .step .paper blockquote p.message, .step .paper p.author {
       border-width: 0;
       line-height: 1.5;
@@ -206,6 +213,9 @@ i, em {
       -ms-box-shadow: 0 10px 12px 0 rgba(0, 50, 0, 0.5), inset 0 0 0 transparent;
       -o-box-shadow: 0 10px 12px 0 rgba(0, 50, 0, 0.5), inset 0 0 0 transparent;
       box-shadow: 0 10px 12px 0 rgba(0, 50, 0, 0.5), inset 0 0 0 transparent; }
+    .impress-enabled .step.active .paper p.image img {
+      filter: alpha(opacity=100);
+      opacity: 1; }
     .impress-enabled .step.active .paper p {
       -webkit-transition: all 1s;
       -moz-transition: all 1s;
